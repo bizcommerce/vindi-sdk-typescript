@@ -1,6 +1,15 @@
 # Vindi TypeScript Library
 
+![TypeScript](https://img.shields.io/badge/TypeScript-4.0-blue.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/bizcommerce/vindi-sdk-typescript/actions/workflows/test.yml/badge.svg)](https://github.com/bizcommerce/vindi-sdk-typescript/actions)
+![Beta](https://img.shields.io/badge/status-beta-yellow)
+
+
+
+
 A TypeScript library for interacting with the Vindi API to create transactions using various payment methods such as Pix, CreditCard, and BankSlip.
+This project is currently in beta. Feel free to contribute and report any issues you encounter.
 
 ## Installation
 
