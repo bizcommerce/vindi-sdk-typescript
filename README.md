@@ -1,6 +1,6 @@
 # Vindi TypeScript Library
 
-![TypeScript](https://img.shields.io/badge/TypeScript-4.0-blue.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/bizcommerce/vindi-sdk-typescript/actions/workflows/test.yml/badge.svg)](https://github.com/bizcommerce/vindi-sdk-typescript/actions)
 ![Beta](https://img.shields.io/badge/status-beta-yellow)
