@@ -1,0 +1,11 @@
+node_modules
+src
+tests
+.vscode
+tsconfig.json
+tsconfig.build.json
+tslint.json
+prettier.config.js
+.prettierrc
+.prettierignore
+jest.config.js

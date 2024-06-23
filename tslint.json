@@ -1,0 +1,23 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+      "tslint:recommended",
+      "tslint-config-prettier"
+    ],
+    "jsRules": {},
+    "rules": {
+      "prettier": false,
+      "quotemark": [true, "single", "avoid-escape"],
+      "semicolon": [true, "always"],
+      "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+      "variable-name": [false],
+      "no-console": [true, "error"]
+    },
+    "rulesDirectory": ["tslint-plugin-prettier"],
+    "linterOptions": {
+      "exclude": [
+        "node_modules/**"
+      ]
+    }
+  }
+  

@@ -1,0 +1,31 @@
+# Ignore build artifacts
+build/
+dist/
+bin/
+
+# Ignore temporary files
+*.tmp
+*.bak
+
+# Ignore IDE-specific folders
+.idea/
+.vscode/
+
+# Ignore sensitive information
+secrets/
+
+# Ignore logs
+logs/
+
+# Ignore dependencies
+node_modules/
+vendor/
+
+# Ignore compiled code
+*.class
+*.jar
+*.war
+
+# Ignore package lock files
+package-lock.json
+yarn.lock
