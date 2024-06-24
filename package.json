@@ -13,10 +13,10 @@
     "lint:fix": "tslint --fix -p tsconfig.json -c tslint.json 'src/**/*.ts' 'tests/**/*.ts'",
     "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["payment", "vindi", "sdk"],
+  "author": "Contardi",
   "license": "ISC",
-  "description": "",
+  "description": "Vindi SDK Typescript library for Vindi Payments only",
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
