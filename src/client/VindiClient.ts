@@ -17,6 +17,7 @@ export class VindiClient {
   private fingerprint?: Fingerprint;
   private transactionRequest?: TransactionRequest;
   private lastRequest: any = null;
+  private lastResponse: any = null;
 
   constructor(isSandbox?: boolean) {
     if (isSandbox) {
@@ -32,12 +33,33 @@ export class VindiClient {
         return Promise.reject(error);
       },
     );
+
+    axios.interceptors.response.use(
+      response => {
+        this.lastResponse = response;
+        return response;
+      },
+      error => {
+        if (error.response) {
+          this.lastResponse = error.response;
+        }
+        return Promise.reject(error);
+      },
+    );
   }
 
   private get headers() {
     return {
       'Content-Type': 'application/json',
     };
+  }
+
+  public getLastRequest() {
+    return this.lastRequest || null;
+  }
+
+  public getLastResponse() {
+    return this.lastResponse || null;
   }
 
   public generateFingerprint(doc: Document): void {
@@ -287,10 +309,8 @@ export class VindiClient {
         { headers: this.headers },
       );
 
-      console.log('Last Request:', this.lastRequest);
       return response.data;
     } catch (error: any) {
-      console.log('Last Request Error:', this.lastRequest);
       throw new Error(
         `Error creating transaction: ${
           error.response ? error.response.data : error.message
