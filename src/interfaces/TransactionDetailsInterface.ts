@@ -5,6 +5,7 @@ export interface TransactionDetailsInterface {
   urlNotification: string;
   priceDiscount?: string;
   free?: string;
+  orderNumber?: string;
 }
 
 export interface TransactionTraceInterface {

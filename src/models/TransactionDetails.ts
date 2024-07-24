@@ -7,6 +7,7 @@ export class TransactionDetails implements TransactionDetailsInterface {
   urlNotification: string;
   free?: string;
   priceDiscount?: string;
+  orderNumber?: string;
 
   constructor(
     customerIp: string,
@@ -15,6 +16,7 @@ export class TransactionDetails implements TransactionDetailsInterface {
     urlNotification: string,
     free?: string,
     priceDiscount?: string,
+    orderNumber?: string,
   ) {
     this.customerIp = customerIp;
     this.shippingType = shippingType;
@@ -22,5 +24,6 @@ export class TransactionDetails implements TransactionDetailsInterface {
     this.urlNotification = urlNotification;
     this.free = free;
     this.priceDiscount = priceDiscount;
+    this.orderNumber = orderNumber;
   }
 }
