@@ -203,6 +203,7 @@ export class VindiClient {
     urlNotification: string,
     free?: string,
     priceDiscount?: string,
+    orderNumber?: string,
   ): void {
     if (!this.transactionRequest) {
       throw new Error('Client not initialized.');
@@ -216,6 +217,7 @@ export class VindiClient {
         urlNotification,
         free,
         priceDiscount,
+        orderNumber,
       ),
     );
   }

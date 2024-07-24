@@ -81,7 +81,8 @@ vindiClient.addTransactionDetails(
   'Sedex', //Shipping Description
   '12', //ShippingPrice
   'http://www.loja.com.br/notificacao', //Notification URL
-  'MY-ORDER-ID' // Free
+  'FREE', // Free
+  'MY-ORDER-NUMBER'
 );
 
 //Estimated Delivery Date

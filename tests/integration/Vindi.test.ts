@@ -58,6 +58,9 @@ describe('VindiClient Integration Tests', () => {
       'Sedex',
       '12',
       'http://www.loja.com.br/notificacao',
+      'FREE',
+      '0',
+      '1000-10'
     );
 
     // Set transaction trace
