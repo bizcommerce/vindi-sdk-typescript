@@ -372,8 +372,9 @@ export class VindiClient {
     trackingCode: string,
   ): Promise<any> {
     try {
+      const token = this.transactionRequest?.getTokenAccount();
       const response = await axios.post(
-        `${this.baseURL}/api/v3/transactions/${transactionId}/tracking`,
+        `${this.baseURL}/api/v3/transactions/${transactionId}/tracking?token_account=${token}`,
         { tracking_code: trackingCode },
         { headers: this.headers },
       );
@@ -389,8 +390,9 @@ export class VindiClient {
 
   public async queryTransaction(transactionId: string): Promise<any> {
     try {
+      const token = this.transactionRequest?.getTokenAccount();
       const response = await axios.get(
-        `${this.baseURL}/api/v3/transactions/${transactionId}`,
+        `${this.baseURL}/api/v3/transactions/get_by_token_brief?token_account=${token}&token_transaction=${transactionId}`,
         { headers: this.headers },
       );
       return response.data;

@@ -19,6 +19,10 @@ export class TransactionRequest {
     this.tokenAccount = tokenAccount;
   }
 
+  getTokenAccount(): string {
+    return this.tokenAccount;
+  }
+
   setCustomer(customer: CustomerInterface): void {
     this.customer = customer;
   }
