@@ -7,6 +7,7 @@ export class Product implements ProductInterface {
   code: string;
   skuCode: string;
   extra: string;
+  weight: string;
 
   constructor(
     description: string,
@@ -15,6 +16,7 @@ export class Product implements ProductInterface {
     code: string,
     skuCode: string,
     extra: string = '',
+    weight: string = '',
   ) {
     this.description = description;
     this.quantity = quantity;
@@ -22,5 +24,6 @@ export class Product implements ProductInterface {
     this.code = code;
     this.skuCode = skuCode;
     this.extra = extra;
+    this.weight = weight;
   }
 }

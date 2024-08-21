@@ -68,7 +68,8 @@ vindiClient.addProduct(
   '119.00', // Price Unit
   'C01', // Code
   'SK-0001', // SKU
-  'Informação Extra' //Extra
+  'Informação Extra', //Extra
+  '0', //Weight
 );
 
 ``` 
@@ -100,7 +101,7 @@ async function createPixTransaction() {
     const response = await vindiClient.createPixTransaction();
     console.log('Pix Transaction:', response);
   } catch (error) {
-    vindiClient.handleError(error);
+    console.log(error);;
   }
 }
 
@@ -122,7 +123,7 @@ async function createCreditCardTransaction() {
     );
     console.log('Credit Card Transaction:', response);
   } catch (error) {
-    vindiClient.handleError(error);
+    console.log(error);;
   }
 }
 
@@ -140,7 +141,7 @@ async function createBankSlipTransaction() {
     const response = await vindiClient.createBankSlipTransaction();
     console.log('Bank Slip Transaction:', response);
   } catch (error) {
-    vindiClient.handleError(error);
+    console.log(error);;
   }
 }
 
@@ -159,11 +160,50 @@ async function createBankSlipPixTransaction() {
     const response = await vindiClient.createBankSlipPixTransaction();
     console.log('Bank Slip ìx Transaction:', response);
   } catch (error) {
-    vindiClient.handleError(error);
+    console.log(error);;
   }
 }
 
 createBankSlipPixTransaction();
+
+```
+
+### CheckoutCartRedirect
+To use the Vindi's checkout, you'll need a different initialization
+
+```typescript
+
+const vindiClient = new VindiClient(true);
+vindiClient.initializeCart(apiKey);
+
+vindiClient.addProduct(
+  'Camiseta de Teste', //Description
+  '1', // Quantity
+  '119.00', // Price Unit
+  'C01', // Code
+  'SK-0001', // SKU
+  'Informação Extra', //Extra
+  '0', //Weight
+);
+
+vindiClient.setCartDetails(
+  '01001000', //Sender post code (mandatory for Vindi)
+  '1000-01', //Order Number
+  'https://seja.loja.biz/notificacao', //URL Notification
+  '10', //Price Additional
+  '8', //Price Discount 
+);
+
+async function createCartTransaction() {
+  try {
+    const response = await vindiClient.createCartTransaction();
+    console.log('Cart Transaction:', response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+createCartTransaction();
 
 ```
 
@@ -176,7 +216,7 @@ async function addTrackingCode(transactionId: string, trackingCode: string) {
     const response = await vindiClient.addTrackingCode(transactionId, trackingCode);
     console.log('Tracking Code Added:', response);
   } catch (error) {
-    vindiClient.handleError(error);
+    console.log(error);;
   }
 }
 
@@ -191,7 +231,7 @@ async function queryTransaction(transactionId: string) {
     const response = await vindiClient.queryTransaction(transactionId);
     console.log('Transaction Details:', response);
   } catch (error) {
-    vindiClient.handleError(error);
+    console.log(error);;
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "vindi-payments",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -14,7 +14,11 @@
     "lint:fix": "tslint --fix -p tsconfig.json -c tslint.json 'src/**/*.ts' 'tests/**/*.ts'",
     "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'"
   },
-  "keywords": ["payment", "vindi", "sdk"],
+  "keywords": [
+    "payment",
+    "vindi",
+    "sdk"
+  ],
   "author": "Contardi",
   "license": "ISC",
   "description": "Vindi SDK Typescript library for Vindi Payments only",
@@ -34,6 +38,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "axios": "^1.7.2"
+    "axios": "^1.7.2",
+    "fast-xml-parser": "^4.4.1"
   }
 }

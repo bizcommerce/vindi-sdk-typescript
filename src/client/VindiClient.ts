@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { XMLParser } from 'fast-xml-parser';
 import { Fingerprint } from '../utils/Fingerprint';
 import { Customer } from '../models/Customer';
 import { Contact } from '../models/Contact';
@@ -7,6 +8,7 @@ import { Product } from '../models/Product';
 import { TransactionDetails } from '../models/TransactionDetails';
 import { TransactionTrace } from '../models/TransactionTrace';
 import { Payment } from '../models/Payment';
+import { CartRequest } from '../models/CartRequest';
 import { TransactionRequest } from '../models/TransactionRequest';
 import { ApiResponseInterface } from '../interfaces/response/ApiResponseInterface';
 import { CardInterface } from 'interfaces/CardInterface';
@@ -16,6 +18,7 @@ export class VindiClient {
   private sandboxBaseURL: string = 'https://api.intermediador.sandbox.yapay.com.br';
   private fingerprint?: Fingerprint;
   private transactionRequest?: TransactionRequest;
+  private cartRequest?: CartRequest;
   private lastRequest: any = null;
   private lastResponse: any = null;
 
@@ -69,6 +72,30 @@ export class VindiClient {
 
   public initialize(tokenAccount: string): void {
     this.transactionRequest = new TransactionRequest(tokenAccount);
+  }
+
+  public initializeCart(tokenAccount: string): void {
+    this.cartRequest = new CartRequest(tokenAccount);
+  }
+
+  public setCartDetails(
+    postalCodeSeller: string,
+    orderNumber: string,
+    urlNotification: string,
+    priceAdditional: string = '0',
+    priceDiscount: string = '0',
+  ): void {
+    if (!this.cartRequest) {
+      throw new Error('Client not initialized.');
+    }
+
+    this.cartRequest.setCartDetails(
+      postalCodeSeller,
+      urlNotification,
+      orderNumber,
+      priceAdditional,
+      priceDiscount,
+    );
   }
 
   public addCustomer(
@@ -180,8 +207,9 @@ export class VindiClient {
     code: string,
     skuCode: string,
     extra: string = '',
+    weight: string = '0',
   ): void {
-    if (!this.transactionRequest) {
+    if (!this.transactionRequest && !this.cartRequest) {
       throw new Error('Client not initialized.');
     }
 
@@ -192,8 +220,16 @@ export class VindiClient {
       code,
       skuCode,
       extra,
+      weight,
     );
-    this.transactionRequest!.addProduct(product);
+
+    if (this.transactionRequest) {
+      this.transactionRequest!.addProduct(product);
+    } 
+
+    if (this.cartRequest) {
+      this.cartRequest!.addProduct(product);
+    }
   }
 
   public addTransactionDetails(
@@ -246,6 +282,14 @@ export class VindiClient {
     }
 
     return this.transactionRequest;
+  }
+
+  public getCartRequest(): CartRequest {
+    if (!this.cartRequest) {
+      throw new Error('Client not initialized.');
+    }
+
+    return this.cartRequest;
   }
 
   setupPayment(paymentMethod: string) {
@@ -365,6 +409,33 @@ export class VindiClient {
         }`,
       );
     }
+  }
+
+  public async createCartTransaction(): Promise<object> {
+    if (!this.cartRequest) {
+      throw new Error('Client not initialized.');
+    }
+
+    try {
+      const response = await axios.post<any>(
+        `${this.baseURL}/v1/tmp_transactions/create`,
+        this.cartRequest.toJson(),
+        { headers: this.headers },
+      );
+
+      return this.parseXml(response.data);
+    } catch (error: any) {
+      throw new Error(
+        `Error creating transaction: ${
+          error.response ? error.response.data : error.message
+        }`,
+      );
+    }
+  }
+
+  public async parseXml(xml: string): Promise<object> {
+    const parser = new XMLParser();
+    return parser.parse(xml);
   }
 
   public async addTrackingCode(

@@ -5,4 +5,5 @@ export interface ProductInterface {
   code: string;
   skuCode: string;
   extra: string;
+  weight: string;
 }
