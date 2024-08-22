@@ -40,7 +40,7 @@ describe('Checkout Client Integration Tests', () => {
     vindiClient.setCartDetails(
       '01001000', 
       '1000-01', 
-      'https://seja.loja.biz/notificacao',
+      'https://minha.loja/notificacao',
       '10',
       '8',
     );

@@ -14,7 +14,7 @@ describe('CheckoutRequest', () => {
     cartRequest = new CartRequest('TOKEN');
     postalCodeSeller = '01001000';
     orderNumber = '1000-01';
-    urlNotification = 'https://seja.loja.biz/notificacao';
+    urlNotification = 'https://minha.loja/notificacao';
     priceAdditional = '10';
     priceDiscount = '8';
     product = new Product(
@@ -26,6 +26,10 @@ describe('CheckoutRequest', () => {
       'Informação Extra',
       '0'
     );
+  });
+
+  it('should get token account', () => {
+    expect(cartRequest.getTokenAccount()).toBe('TOKEN');
   });
 
   it('should add product', () => {
@@ -48,42 +52,46 @@ describe('CheckoutRequest', () => {
     expect(cartRequest.priceDiscount).toBe(priceDiscount);
   });
 
-
-  it('should convert camel case to snake case single object', () => {
-    const obj = { camelCase: 'value' };
-    const expected = { camel_case: 'value' };
-    expect(
-      cartRequest.convertCamelCaseToSnakeCaseRecursive(obj),
-    ).toEqual(expected);
+  it('should set url success', () => {
+    const urlSuccess = 'https://minha.loja/success';
+    cartRequest.setUrlSuccess(urlSuccess);
+    expect(cartRequest.urlSuccess).toBe(urlSuccess);
   });
 
-  it('should convert camel case to snake case recursively', () => {
-    const obj = {
-      tokenAccount: 'tokenAccount',
-      transactionProduct: {
-        name: 'Camiseta Tony Stark',
-        code: '1',
-        price: '130.00',
-        quantity: '1',
-        category: '0001',
-        extraInfo: 'Informação Extra',
-      },
-    };
+  it('should set url process', () => {
+    const urlProcess = 'https://minha.loja/processing';
+    cartRequest.setUrlProcess(urlProcess);
+    expect(cartRequest.urlProcess).toBe(urlProcess);
+  });
 
-    const expected = {
-      token_account: 'tokenAccount',
-      transaction_product: {
-        name: 'Camiseta Tony Stark',
-        code: '1',
-        price: '130.00',
-        quantity: '1',
-        category: '0001',
-        extra_info: 'Informação Extra',
-      },
-    };
-    expect(
-      cartRequest.convertCamelCaseToSnakeCaseRecursive(obj),
-    ).toEqual(expected);
+  it('should set url cancel', () => {
+    const urlCancel = 'https://minha.loja/cancel';
+    cartRequest.setUrlCancel(urlCancel);
+    expect(cartRequest.urlCancel).toBe(urlCancel);
+  });
+
+  it('should set postal code customer', () => {
+    const postalCodeCustomer = '01001000';
+    cartRequest.setPostalCodeCustomer(postalCodeCustomer);
+    expect(cartRequest.postalCodeCustomer).toBe(postalCodeCustomer);
+  });
+
+  it('should set max split transaction', () => {
+    const maxSplitTransaction = '10';
+    cartRequest.setMaxSplitTransaction(maxSplitTransaction);
+    expect(cartRequest.maxSplitTransaction).toBe(maxSplitTransaction);
+  });
+
+  it('should set shipping type', () => {
+    const shippingType = 'Sedex';
+    cartRequest.setShippingType(shippingType);
+    expect(cartRequest.shippingType).toBe(shippingType);
+  });
+
+  it('should set shipping price', () => {
+    const shippingPrice = '10';
+    cartRequest.setShippingPrice(shippingPrice);
+    expect(cartRequest.shippingPrice).toBe(shippingPrice);
   });
 
 });

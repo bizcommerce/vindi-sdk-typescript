@@ -186,13 +186,19 @@ vindiClient.addProduct(
   '0', //Weight
 );
 
+//Mandatory fields
 vindiClient.setCartDetails(
   '01001000', //Sender post code (mandatory for Vindi)
   '1000-01', //Order Number
-  'https://seja.loja.biz/notificacao', //URL Notification
+  'https://minha.loja/notificacao', //URL Notification
   '10', //Price Additional
   '8', //Price Discount 
 );
+
+//Optional Fields
+vindiClient.setUrlSuccess('https://minha.loja/success'); //Payment Confirmed
+vindiClient.setUrlProcess('https://minha.loja/process'); //Waiting Payment
+vindiClient.setUrlProcess('https://minha.loja/cancel'); //Canceled
 
 async function createCartTransaction() {
   try {

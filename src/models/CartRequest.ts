@@ -1,4 +1,5 @@
 import { ProductInterface } from '../interfaces/ProductInterface';
+import { StringConvertor } from '../utils/StringConvertor';
 
 export class CartRequest {
   tokenAccount: string;
@@ -7,6 +8,14 @@ export class CartRequest {
   orderNumber?: string;
   priceAdditional?: string;
   priceDiscount?: string;
+  urlSuccess?: string;
+  urlProcess?: string;
+  urlCancel?: string;
+  postalCodeCustomer?: string;
+  maxSplitTransaction?: string;
+  shippingType?: string;
+  shippingPrice?: string;
+  
   transactionProduct: ProductInterface[] = [];
 
   constructor(
@@ -33,44 +42,56 @@ export class CartRequest {
     this.priceDiscount = priceDiscount;
   }
 
+  setUrlSuccess(urlSuccess: string): void {
+    this.urlSuccess = urlSuccess;
+  }
+
+  setUrlProcess(urlProcess: string): void {
+    this.urlProcess = urlProcess;
+  }
+
+  setUrlCancel(urlCancel: string): void {
+    this.urlCancel = urlCancel;
+  }
+
+  setPostalCodeCustomer(postalCodeCustomer: string): void {
+    this.postalCodeCustomer = postalCodeCustomer;
+  }
+
+  setMaxSplitTransaction(maxSplitTransaction: string): void {
+    this.maxSplitTransaction = maxSplitTransaction;
+  }
+
+  setShippingType(shippingType: string): void {
+    this.shippingType = shippingType;
+  }
+
+  setShippingPrice(shippingPrice: string): void {
+    this.shippingPrice = shippingPrice;
+  }
+
+
+
   addProduct(product: ProductInterface): void {
     this.transactionProduct.push(product);
   }
 
-  convertCamelCaseToSnakeCaseRecursive(obj: any): any {
-    if (Array.isArray(obj)) {
-      return obj.map((item) => this.convertCamelCaseToSnakeCaseRecursive(item));
-    }
-
-    if (obj !== null && typeof obj === 'object') {
-      const snakeCaseObj: any = {};
-      for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-          if (obj[key] !== undefined) {
-            const value = obj[key];
-            const snakeCaseKey = key.replace(
-              /[A-Z]/g,
-              (letter) => `_${letter.toLowerCase()}`,
-            );
-            snakeCaseObj[snakeCaseKey] = this.convertCamelCaseToSnakeCaseRecursive(value);
-          }
-        }
-      }
-      return snakeCaseObj;
-    }
-
-    return obj;
-  }
-
   toJson(): any {
-    return this.convertCamelCaseToSnakeCaseRecursive({
+    return StringConvertor.convertCamelCaseToSnakeCaseRecursive({
       tokenAccount: this.tokenAccount,
       postalCodeSeller: this.postalCodeSeller,
       urlNotification: this.urlNotification,
+      urlSuccess: this.urlSuccess,
+      urlProcess: this.urlProcess,
+      urlCancel: this.urlCancel,
       orderNumber: this.orderNumber,
       priceAdditional: this.priceAdditional,
       priceDiscount: this.priceDiscount,
       transactionProduct: this.transactionProduct,
+      postalCodeCustomer: this.postalCodeCustomer,
+      maxSplitTransaction: this.maxSplitTransaction,
+      shippingType: this.shippingType,
+      shippingPrice: this.shippingPrice,
     });
   }
 }
