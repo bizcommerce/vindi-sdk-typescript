@@ -196,9 +196,9 @@ vindiClient.setCartDetails(
 );
 
 //Optional Fields
-vindiClient.setUrlSuccess('https://minha.loja/success'); //Payment Confirmed
-vindiClient.setUrlProcess('https://minha.loja/process'); //Waiting Payment
-vindiClient.setUrlProcess('https://minha.loja/cancel'); //Canceled
+vindiClient.getCartRequest().setUrlSuccess('https://minha.loja/success'); //Payment Confirmed
+vindiClient.getCartRequest().setUrlProcess('https://minha.loja/process'); //Waiting Payment
+vindiClient.getCartRequest().setUrlCancel('https://minha.loja/cancel'); //Canceled
 
 async function createCartTransaction() {
   try {

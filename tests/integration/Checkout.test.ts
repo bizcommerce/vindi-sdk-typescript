@@ -44,6 +44,10 @@ describe('Checkout Client Integration Tests', () => {
       '10',
       '8',
     );
+
+    vindiClient.getCartRequest().setUrlSuccess('https://minha.loja/success'); //Payment Confirmed
+    vindiClient.getCartRequest().setUrlProcess('https://minha.loja/process'); //Waiting Payment
+    vindiClient.getCartRequest().setUrlCancel('https://minha.loja/cancel'); //Canceled
     
     const response = await vindiClient.createCartTransaction();
     const expectedTransactionRequest = vindiClient.getCartRequest().toJson();
