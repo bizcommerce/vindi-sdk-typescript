@@ -25,7 +25,12 @@ export class Payment implements PaymentInterface {
       throw new Error('Invalid credit card number.');
     }
 
-    this.setPaymentMethodId(CreditCard.getCardBrand(cardDetails.cardNumber));
+    const paymentMethodId = CreditCard.getCardBrand(cardDetails.cardNumber);
+    if (paymentMethodId === 'Unknown') {
+      throw new Error(`Unknown card: BIN: ${cardDetails.cardNumber.substring(0,6)}, LAST4: ${cardDetails.cardNumber} .`);
+    }
+    
+    this.setPaymentMethodId(paymentMethodId);
 
     this.cardName = cardDetails.cardName;
     this.cardNumber = cardDetails.cardNumber;
