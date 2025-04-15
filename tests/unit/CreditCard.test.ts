@@ -10,6 +10,10 @@ describe('CreditCard', () => {
             expect(CreditCard.getCardBrand('5111111111111111')).toBe('Mastercard');
         });
 
+        it('should return MasterCard for another MasterCard card number', () => {
+            expect(CreditCard.getCardBrand('2306501234567893')).toBe('Mastercard');
+        });
+
         it('should return American Express for an Amex card number', () => {
             expect(CreditCard.getCardBrand('371111111111111')).toBe('American Express');
         });
