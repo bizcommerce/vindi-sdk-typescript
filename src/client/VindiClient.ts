@@ -333,10 +333,9 @@ export class VindiClient {
       );
       return response.data;
     } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
       throw new Error(
-        `Error creating transaction: ${
-          error.response ? error.response.data : error.message
-        }`,
+        `Error creating transaction: ${JSON.stringify(errorMessage)}`,
       );
     }
   }
@@ -357,10 +356,9 @@ export class VindiClient {
 
       return response.data;
     } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
       throw new Error(
-        `Error creating transaction: ${
-          error.response ? error.response.data : error.message
-        }`,
+        `Error creating transaction: ${JSON.stringify(errorMessage)}`,
       );
     }
   }
@@ -380,10 +378,9 @@ export class VindiClient {
       );
       return response.data;
     } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
       throw new Error(
-        `Error creating transaction: ${
-          error.response ? error.response.data : error.message
-        }`,
+        `Error creating transaction: ${JSON.stringify(errorMessage)}`,
       );
     }
   }
@@ -403,10 +400,9 @@ export class VindiClient {
       );
       return response.data;
     } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
       throw new Error(
-        `Error creating transaction: ${
-          error.response ? error.response.data : error.message
-        }`,
+        `Error creating transaction: ${JSON.stringify(errorMessage)}`,
       );
     }
   }
@@ -425,10 +421,9 @@ export class VindiClient {
 
       return this.parseXml(response.data);
     } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
       throw new Error(
-        `Error creating transaction: ${
-          error.response ? error.response.data : error.message
-        }`,
+        `Error creating transaction: ${JSON.stringify(errorMessage)}`,
       );
     }
   }
@@ -451,10 +446,9 @@ export class VindiClient {
       );
       return response.data;
     } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
       throw new Error(
-        `Error adding tracking code: ${
-          error.response ? error.response.data : error.message
-        }`,
+        `Error adding tracking code: ${JSON.stringify(errorMessage)}`,
       );
     }
   }
@@ -468,10 +462,9 @@ export class VindiClient {
       );
       return response.data;
     } catch (error: any) {
+      const errorMessage = error.response ? error.response.data : error.message;
       throw new Error(
-        `Error querying transaction: ${
-          error.response ? error.response.data : error.message
-        }`,
+        `Error querying transaction: ${this.baseURL} - ${JSON.stringify(errorMessage)}`,
       );
     }
   }
