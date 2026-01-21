@@ -70,8 +70,8 @@ export class VindiClient {
     this.fingerprint.generateFingerprint(doc);
   }
 
-  public initialize(tokenAccount: string): void {
-    this.transactionRequest = new TransactionRequest(tokenAccount);
+  public initialize(tokenAccount: string, resellerToken?: string): void {
+    this.transactionRequest = new TransactionRequest(tokenAccount, resellerToken);
   }
 
   public initializeCart(tokenAccount: string): void {

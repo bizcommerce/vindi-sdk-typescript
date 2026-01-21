@@ -9,6 +9,7 @@ import { PaymentInterface } from '../interfaces/PaymentInterface';
 
 export class TransactionRequest {
   tokenAccount: string;
+  resellerToken?: string;
   customer!: CustomerInterface;
   transactionProduct: ProductInterface[] = [];
   transaction!: TransactionDetailsInterface;
@@ -16,8 +17,9 @@ export class TransactionRequest {
   payment!: PaymentInterface;
   paymentMethodId!: string;
 
-  constructor(tokenAccount: string) {
+  constructor(tokenAccount: string, resellerToken?: string) {
     this.tokenAccount = tokenAccount;
+    this.resellerToken = resellerToken;
   }
 
   getTokenAccount(): string {
@@ -50,13 +52,19 @@ export class TransactionRequest {
   }
 
   toJson(): any {
-    return StringConvertor.convertCamelCaseToSnakeCaseRecursive({
+    const data: any = {
       tokenAccount: this.tokenAccount,
       customer: this.customer,
       transactionProduct: this.transactionProduct,
       transaction: this.transaction,
       transactionTrace: this.transactionTrace,
       payment: this.payment,
-    });
+    };
+
+    if (this.resellerToken) {
+      data.resellerToken = this.resellerToken;
+    }
+
+    return StringConvertor.convertCamelCaseToSnakeCaseRecursive(data);
   }
 }
