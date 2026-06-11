@@ -8,6 +8,7 @@ export class TransactionDetails implements TransactionDetailsInterface {
   free?: string;
   priceDiscount?: string;
   orderNumber?: string;
+  availablePaymentMethods?: string;
 
   constructor(
     customerIp: string,
@@ -17,6 +18,7 @@ export class TransactionDetails implements TransactionDetailsInterface {
     free?: string,
     priceDiscount?: string,
     orderNumber?: string,
+    availablePaymentMethods?: string,
   ) {
     this.customerIp = customerIp;
     this.shippingType = shippingType;
@@ -25,5 +27,6 @@ export class TransactionDetails implements TransactionDetailsInterface {
     this.free = free;
     this.priceDiscount = priceDiscount;
     this.orderNumber = orderNumber;
+    this.availablePaymentMethods = availablePaymentMethods;
   }
 }

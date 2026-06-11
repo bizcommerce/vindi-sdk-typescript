@@ -240,6 +240,7 @@ export class VindiClient {
     free?: string,
     priceDiscount?: string,
     orderNumber?: string,
+    availablePaymentMethods?: string,
   ): void {
     if (!this.transactionRequest) {
       throw new Error('Client not initialized.');
@@ -254,6 +255,7 @@ export class VindiClient {
         free,
         priceDiscount,
         orderNumber,
+        availablePaymentMethods,
       ),
     );
   }

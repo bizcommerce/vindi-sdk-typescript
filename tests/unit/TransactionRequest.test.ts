@@ -59,4 +59,35 @@ describe('TransactionRequest', () => {
     transactionRequest.setPayment(payment);
     expect(transactionRequest.payment).toBe(payment);
   });
+
+  it('should fallback available_payment_methods to the payment_method_id', () => {
+    transactionRequest.setTransactionDetails(transactionDetails);
+    transactionRequest.setPayment(payment);
+
+    const json = transactionRequest.toJson();
+
+    expect(json.transaction.available_payment_methods).toBe(
+      payment.getPaymentMethodId(),
+    );
+    expect(json.transaction.available_payment_methods).toBe(json.payment.payment_method_id);
+  });
+
+  it('should keep an explicit available_payment_methods over the fallback', () => {
+    const detailsWithMethods = new TransactionDetails(
+      '127.0.0.1',
+      'Sedex',
+      '12',
+      'http://www.loja.com.br/notificacao',
+      undefined,
+      undefined,
+      undefined,
+      '3,4,27',
+    );
+    transactionRequest.setTransactionDetails(detailsWithMethods);
+    transactionRequest.setPayment(payment);
+
+    const json = transactionRequest.toJson();
+
+    expect(json.transaction.available_payment_methods).toBe('3,4,27');
+  });
 });

@@ -6,6 +6,7 @@ export interface TransactionDetailsInterface {
   priceDiscount?: string;
   free?: string;
   orderNumber?: string;
+  availablePaymentMethods?: string;
 }
 
 export interface TransactionTraceInterface {

@@ -52,6 +52,11 @@ export class TransactionRequest {
   }
 
   toJson(): any {
+    if (this.transaction && !this.transaction.availablePaymentMethods) {
+      this.transaction.availablePaymentMethods =
+        this.payment?.paymentMethodId ?? this.paymentMethodId;
+    }
+
     const data: any = {
       tokenAccount: this.tokenAccount,
       customer: this.customer,
